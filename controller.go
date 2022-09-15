@@ -1,6 +1,8 @@
 package ezquake
 
 import (
+	"time"
+
 	"github.com/vikpe/go-ezquake/internal/pkg/proc"
 )
 
@@ -22,4 +24,15 @@ func (c *ClientController) Command(cmd string) {
 	}
 
 	c.pipe.Write(cmd)
+}
+
+func (c *ClientController) CommandWithTimeout(cmd string, duration time.Duration) {
+	c.Command(cmd)
+	time.Sleep(duration)
+}
+
+func (c *ClientController) CommandAfterDelay(cmd string, delay time.Duration) {
+	time.AfterFunc(delay, func() {
+		c.Command(cmd)
+	})
 }
