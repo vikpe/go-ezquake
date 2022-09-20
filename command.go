@@ -3,6 +3,6 @@ package ezquake
 import "time"
 
 type CommandOptions struct {
-	Timeout time.Duration
-	Delay   time.Duration
+	Block time.Duration
+	Delay time.Duration
 }
