@@ -12,9 +12,12 @@ type ClientController struct {
 }
 
 func NewClientController(username string, binPath string) *ClientController {
+	writer := NewPipeWriter(username)
+	writer.Clear()
+
 	return &ClientController{
 		Process: proc.NewProcessController(binPath),
-		pipe:    NewPipeWriter(username),
+		pipe:    writer,
 	}
 }
 

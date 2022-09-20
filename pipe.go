@@ -49,10 +49,8 @@ func (w *PipeWriter) path() string {
 	return fmt.Sprintf("/tmp/ezquake_fifo_%s", w.username)
 }
 
-func (w *PipeWriter) Clear() {
+func (w *PipeWriter) Clear() error {
 	w.mux.Lock()
 	defer w.mux.Unlock()
-
-	file, _ := os.OpenFile(w.path(), os.O_TRUNC, 0644)
-	defer file.Close()
+	return os.Truncate(w.path(), 0)
 }
