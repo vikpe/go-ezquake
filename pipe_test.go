@@ -36,3 +36,14 @@ func TestPipeWriter_Write(t *testing.T) {
 	pipeWriter.Write("lastscores")
 	assert.Equal(t, "console;lastscores;", readPipe(username))
 }
+
+func TestPipeWriter_Clear(t *testing.T) {
+	username := "test"
+	resetPipe(username)
+
+	pipeWriter := ezquake.NewPipeWriter(username)
+	pipeWriter.Write("console")
+	pipeWriter.Write("qtvplay 2@foo.com:28000")
+	pipeWriter.Clear()
+	assert.Equal(t, "", readPipe(username))
+}

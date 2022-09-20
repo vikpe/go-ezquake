@@ -48,3 +48,11 @@ func (w *PipeWriter) writeToPipe(value string) error {
 func (w *PipeWriter) path() string {
 	return fmt.Sprintf("/tmp/ezquake_fifo_%s", w.username)
 }
+
+func (w *PipeWriter) Clear() {
+	w.mux.Lock()
+	defer w.mux.Unlock()
+
+	file, _ := os.OpenFile(w.path(), os.O_TRUNC, 0644)
+	defer file.Close()
+}
