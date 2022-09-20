@@ -33,8 +33,8 @@ func (c *ClientController) CommandWithOptions(cmd string, options CommandOptions
 	cmdFunc := func() {
 		c.Command(cmd)
 
-		if options.Timeout > 0 {
-			time.Sleep(options.Timeout)
+		if options.Block > 0 {
+			time.Sleep(options.Block)
 		}
 	}
 
